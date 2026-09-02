@@ -25,7 +25,7 @@ public static class GetParticipantsLatestEngagement
         /// <summary>Optional filter to a specific engagement type (the engagement category).</summary>
         public string? EngagementType { get; set; }
 
-        /// <summary>Optional narrowing to a sub-tenant within the current user's visible hierarchy.</summary>
+        /// <summary>Optional narrowing to a sub tenant within the current user's visible hierarchy.</summary>
         public string? TenantId { get; set; }
     }
 
@@ -77,7 +77,8 @@ public static class GetParticipantsLatestEngagement
                     engagement.EngagedWithTenant,
                     owner.DisplayName,
                     CurrentLocationName = currentLocation.Name,
-                    engagement.EngagedOn
+                    engagement.EngagedOn,
+                    engagement.EngagedAtLocationType
                 };
 #pragma warning restore CS8602, CS8604
 
@@ -98,7 +99,8 @@ public static class GetParticipantsLatestEngagement
                     e.EngagedWithTenant,
                     e.DisplayName,
                     e.CurrentLocationName,
-                    e.EngagedOn
+                    e.EngagedOn,
+                    e.EngagedAtLocationType
                 )).ToListAsync(cancellationToken);
 
             return Result<PaginatedData<ParticipantEngagementDto>>.Success(
